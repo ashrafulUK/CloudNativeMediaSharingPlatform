@@ -1,0 +1,35 @@
+{
+  "definition": {
+    "triggers": {
+      "manual": {
+        "type": "Request",
+        "kind": "Http",
+        "inputs": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "FileName": { "type": "string" },
+              "userID": { "type": "string" },
+              "userName": { "type": "string" },
+              "File": { "type": "string", "contentEncoding": "base64" }
+            }
+          }
+        }
+      }
+    },
+    "actions": {
+      "CreateBlob": {
+        "type": "ApiConnection",
+        "inputs": {
+          "method": "put",
+          "path": "/v2/datasets/default/files",
+          "authentication": {
+            "type": "Raw",
+            "value": "<Azure_Connection_Secret>"
+          }
+        },
+        "runAfter": {}
+      }
+    }
+  }
+}
